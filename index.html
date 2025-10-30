@@ -292,42 +292,6 @@
             background: #0052a3;
         }
         
-        .success-message {
-            display: none;
-            background: #28a745;
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
-            text-align: center;
-            font-weight: 500;
-            line-height: 1.8;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
-        }
-        
-        .success-message strong {
-            font-size: 1.2rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        
-        .success-message.show {
-            display: block;
-            animation: slideDown 0.4s ease-out;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
         .contact-info {
             margin-top: 2rem;
             padding-top: 2rem;
@@ -496,40 +460,36 @@
                 <!-- 
                     FORMSPREE CONFIGURED ✅
                     Endpoint: https://formspree.io/f/xyzbjqak
-                    Form submissions will be sent to: contact@engcoresolutions.com.au
-                    Uses AJAX to stay on page and provide better UX
+                    Form submissions sent to: contact@engcoresolutions.com.au
+                    Redirects to thanks.html after successful submission
                 -->
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/xyzbjqak" method="POST">
                     
-                    <!-- Honeypot field - catches bots (invisible to humans) -->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                        <input type="text" name="honeypot" tabindex="-1" autocomplete="off" placeholder="Leave this empty">
-                    </div>
-                    
-                    <!-- Timestamp field for rate limiting -->
-                    <input type="hidden" name="_timestamp" id="timestamp">
-                    
-                    <!-- Custom subject line -->
+                    <!-- Hidden fields for Formspree -->
                     <input type="hidden" name="_subject" value="New inquiry from EngCore Solutions website">
+                    <input type="hidden" name="_cc" id="emailCc">
+                    
+                    <!-- Honeypot field for spam prevention -->
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
                     
                     <div class="form-group">
                         <label for="name">Name *</label>
-                        <input type="text" id="name" name="name" maxlength="100" required>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" maxlength="100" required>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="company">Company</label>
-                        <input type="text" id="company" name="company" maxlength="100">
+                        <input type="text" id="company" name="company">
                     </div>
                     
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" maxlength="20">
+                        <input type="tel" id="phone" name="phone">
                     </div>
                     
                     <div class="form-group">
@@ -547,24 +507,10 @@
                     
                     <div class="form-group">
                         <label for="message">Tell us about your project *</label>
-                        <textarea id="message" name="message" maxlength="2000" required></textarea>
+                        <textarea id="message" name="message" required></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-btn" id="submitBtn">Submit Inquiry</button>
-                    
-                    <div class="success-message" id="successMessage">
-                        <strong>✓ Thank You!</strong><br>
-                        Your inquiry has been successfully submitted.<br><br>
-                        We've received your message and will respond within 24 hours during business hours (Monday-Friday, 9am-5pm AEST).<br><br>
-                        If your inquiry is urgent, please email us directly at:<br>
-                        <strong>contact@engcoresolutions.com.au</strong>
-                    </div>
-                    
-                    <div class="success-message" id="errorMessage" style="background: #dc3545;">
-                        <strong>⚠ Oops!</strong><br>
-                        Something went wrong. Please try again or email us directly at:<br>
-                        <strong>contact@engcoresolutions.com.au</strong>
-                    </div>
+                    <button type="submit" class="submit-btn">Submit Inquiry</button>
                 </form>
                 
                 <div class="contact-info">
@@ -586,65 +532,21 @@
     </footer>
 
     <script>
-        // ============================================
-        // SECURITY FEATURES
-        // ============================================
-        
-        // Rate Limiting - Prevent rapid-fire submissions
-        let lastSubmissionTime = 0;
-        const RATE_LIMIT_MS = 10000; // 10 seconds between submissions
-        
-        // Track submission attempts from this session
-        let submissionCount = 0;
-        const MAX_SUBMISSIONS = 5; // Max 5 submissions per session
-        
-        // Input Sanitization Function
-        function sanitizeInput(input) {
-            if (typeof input !== 'string') return input;
-            
-            // Remove potential XSS attempts
-            return input
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#x27;')
-                .replace(/\//g, '&#x2F;')
-                .trim();
-        }
-        
-        // Validate email format
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-        
-        // Check if honeypot was filled (bot detection)
-        function isBot(honeypotValue) {
-            return honeypotValue && honeypotValue.length > 0;
-        }
-        
-        // Rate limiting check
-        function isRateLimited() {
-            const now = Date.now();
-            const timeSinceLastSubmit = now - lastSubmissionTime;
-            
-            if (timeSinceLastSubmit < RATE_LIMIT_MS) {
-                const waitTime = Math.ceil((RATE_LIMIT_MS - timeSinceLastSubmit) / 1000);
-                alert(`Please wait ${waitTime} seconds before submitting again.`);
-                return true;
-            }
-            
-            if (submissionCount >= MAX_SUBMISSIONS) {
-                alert('Maximum submissions reached for this session. Please refresh the page or contact us directly via email.');
-                return true;
-            }
-            
-            return false;
-        }
-        
-        // ============================================
-        // SMOOTH SCROLLING
-        // ============================================
+        // Auto-populate CC field with user's email so they receive a copy
+        const emailInput = document.getElementById('email');
+        const emailCc = document.getElementById('emailCc');
+
+        emailInput.addEventListener('input', function() {
+            emailCc.value = this.value;
+        });
+
+        // Ensure CC is set before form submission
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', function() {
+            emailCc.value = emailInput.value;
+        });
+
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -657,171 +559,6 @@
                 }
             });
         });
-        
-        // ============================================
-        // FORM SUBMISSION WITH SECURITY
-        // ============================================
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            const form = this;
-            const submitBtn = document.getElementById('submitBtn');
-            const successMsg = document.getElementById('successMessage');
-            const errorMsg = document.getElementById('errorMessage');
-            
-            // Hide any previous messages
-            successMsg.classList.remove('show');
-            errorMsg.classList.remove('show');
-            
-            // Get form values
-            const honeypot = form.querySelector('input[name="honeypot"]').value;
-            const name = form.querySelector('#name').value;
-            const email = form.querySelector('#email').value;
-            const message = form.querySelector('#message').value;
-            
-            // SECURITY CHECK 1: Honeypot (Bot Detection)
-            if (isBot(honeypot)) {
-                e.preventDefault();
-                console.log('Bot detected via honeypot');
-                // Don't show error to bot - just fail silently
-                return false;
-            }
-            
-            // SECURITY CHECK 2: Rate Limiting
-            if (isRateLimited()) {
-                e.preventDefault();
-                return false;
-            }
-            
-            // SECURITY CHECK 3: Basic Input Validation
-            if (!name || name.length < 2 || name.length > 100) {
-                e.preventDefault();
-                alert('Please enter a valid name (2-100 characters).');
-                return false;
-            }
-            
-            if (!isValidEmail(email)) {
-                e.preventDefault();
-                alert('Please enter a valid email address.');
-                return false;
-            }
-            
-            if (!message || message.length < 10 || message.length > 2000) {
-                e.preventDefault();
-                alert('Please enter a message between 10-2000 characters.');
-                return false;
-            }
-            
-            // SECURITY CHECK 4: Sanitize all inputs (prevents XSS)
-            const sanitizedData = {
-                name: sanitizeInput(name),
-                email: sanitizeInput(email),
-                company: sanitizeInput(form.querySelector('#company').value),
-                phone: sanitizeInput(form.querySelector('#phone').value),
-                interest: sanitizeInput(form.querySelector('#interest').value),
-                message: sanitizeInput(message)
-            };
-            
-            // Add timestamp for server-side tracking
-            document.getElementById('timestamp').value = new Date().toISOString();
-            
-            // Formspree endpoint
-            const formspreeEndpoint = 'https://formspree.io/f/xyzbjqak';
-            
-            // Disable submit button to prevent double-submission
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting...';
-            
-            // Prepare form data for Formspree
-            const formData = new FormData(form);
-            
-            // Submit to Formspree via AJAX
-            fetch(formspreeEndpoint, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Success! Update rate limiting
-                    lastSubmissionTime = Date.now();
-                    submissionCount++;
-                    
-                    // Show success message
-                    successMsg.classList.add('show');
-                    
-                    // Reset form
-                    form.reset();
-                    
-                    // Re-enable button
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Submit Inquiry';
-                    
-                    // Hide success message after 8 seconds
-                    setTimeout(() => {
-                        successMsg.classList.remove('show');
-                    }, 8000);
-                    
-                    console.log('✅ Form submitted successfully to Formspree');
-                } else {
-                    // Error from Formspree
-                    response.json().then(data => {
-                        console.error('Formspree error:', data);
-                        errorMsg.textContent = 'Oops! There was a problem. Please try again or email us directly.';
-                        errorMsg.classList.add('show');
-                        
-                        // Re-enable button
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Submit Inquiry';
-                        
-                        // Hide error after 8 seconds
-                        setTimeout(() => {
-                            errorMsg.classList.remove('show');
-                        }, 8000);
-                    });
-                }
-            })
-            .catch(error => {
-                // Network error or other issue
-                console.error('Submission error:', error);
-                errorMsg.textContent = 'Network error. Please check your connection and try again.';
-                errorMsg.classList.add('show');
-                
-                // Re-enable button
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Inquiry';
-                
-                // Hide error after 8 seconds
-                setTimeout(() => {
-                    errorMsg.classList.remove('show');
-                }, 8000);
-            });
-        });
-        
-        // ============================================
-        // ADDITIONAL SECURITY: Disable right-click on form (optional)
-        // ============================================
-        // Uncomment below if you want to prevent easy form inspection by bots
-        /*
-        document.getElementById('contactForm').addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            return false;
-        });
-        */
-        
-        // ============================================
-        // LOG SECURITY FEATURES
-        // ============================================
-        console.log('🛡️ Security Features Enabled:');
-        console.log('✅ Honeypot spam trap');
-        console.log('✅ Rate limiting (10s between submissions)');
-        console.log('✅ Input sanitization (XSS prevention)');
-        console.log('✅ Email validation');
-        console.log('✅ Session submission limit (5 max)');
-        console.log('✅ Formspree configured and ready (AJAX mode)');
-        console.log('\n📧 Form submissions will be sent to: contact@engcoresolutions.com.au');
-        console.log('🚀 Your contact form is LIVE and secure!');
-        console.log('💡 Form stays on page - no redirect to Formspree');
     </script>
 </body>
 </html>
