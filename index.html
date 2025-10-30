@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngCore Solutions | Engineering Consultancy Services</title>
+    <meta name="description" content="Expert engineering consultancy for capital investment, asset management, and project management. 20+ years experience serving manufacturing, mining, and infrastructure.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0066cc;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #0066cc;
+        }
+        
+        .cta-button {
+            background: #0066cc;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: #0052a3;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0066cc 0%, #004999 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #0066cc;
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Credentials Bar */
+        .credentials {
+            background: #f8f9fa;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .credentials-items {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .credential-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .credential-item .icon {
+            color: #0066cc;
+            font-size: 1.5rem;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            padding: 2.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .service-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            border-color: #0066cc;
+        }
+        
+        .service-card h3 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .service-card p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .service-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .service-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #555;
+        }
+        
+        .service-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+            font-weight: bold;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #0066cc 0%, #004999 100%);
+            color: white;
+        }
+        
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            background: #0066cc;
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #0052a3;
+        }
+        
+        .contact-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .contact-info p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            color: #888;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .credentials-items {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">EngCore Solutions</div>
+                <ul class="nav-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact" class="cta-button">Get in Touch</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Strategic Engineering Consultancy<br>for Industrial Excellence</h1>
+            <p class="subtitle">Expert guidance for capital investment decisions, asset management, and project delivery in manufacturing, mining, and infrastructure sectors</p>
+            <a href="#contact" class="btn-primary">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Credentials Bar -->
+    <section class="credentials">
+        <div class="container">
+            <div class="credentials-items">
+                <div class="credential-item">
+                    <span class="icon">✓</span>
+                    <span>20+ Years Experience</span>
+                </div>
+                <div class="credential-item">
+                    <span class="icon">✓</span>
+                    <span>Chartered Professional Engineer (CPEng)</span>
+                </div>
+                <div class="credential-item">
+                    <span class="icon">✓</span>
+                    <span>Registered Professional Engineer QLD (RPEQ)</span>
+                </div>
+                <div class="credential-item">
+                    <span class="icon">✓</span>
+                    <span>Executive Leadership</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Consulting Services</h2>
+            <p class="section-subtitle">Delivering strategic insights and technical excellence across the full project and asset lifecycle</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Executive Consulting</h3>
+                    <p>Board-level strategic guidance for complex engineering decisions, organizational transformation, and capital portfolio optimization.</p>
+                    <ul>
+                        <li>Strategic planning and capital portfolio management</li>
+                        <li>Engineering and design management</li>
+                        <li>Executive stakeholder engagement</li>
+                        <li>Organizational transformation and process improvement</li>
+                        <li>Major project feasibility studies and business case development</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <h3>Capital Investment Analysis</h3>
+                    <p>Data-driven evaluation and prioritization of capital expenditure proposals with comprehensive risk and return assessment.</p>
+                    <ul>
+                        <li>CapEx evaluation and project prioritization</li>
+                        <li>ROI, NPV, and IRR financial analysis</li>
+                        <li>Risk assessment and mitigation strategy development</li>
+                        <li>Business case preparation and review</li>
+                        <li>Investment decision support and governance frameworks</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <h3>Asset Management</h3>
+                    <p>Life-cycle optimization and strategic planning for critical industrial assets to maximize value and minimize risk.</p>
+                    <ul>
+                        <li>Asset replacement and renewal planning</li>
+                        <li>Maintenance strategy optimization</li>
+                        <li>Life-cycle cost analysis and TCO modeling</li>
+                        <li>Condition assessment programs</li>
+                        <li>Asset performance benchmarking and improvement</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <h3>Project Management</h3>
+                    <p>End-to-end project delivery expertise ensuring on-time, on-budget outcomes for complex engineering initiatives.</p>
+                    <ul>
+                        <li>Project planning and execution management</li>
+                        <li>Schedule development and critical path analysis</li>
+                        <li>Budget control and cost management</li>
+                        <li>Risk and issue management</li>
+                        <li>Stakeholder communication and reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Let's Discuss Your Project</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">Get in touch to explore how strategic engineering consultancy can drive better outcomes for your organization.</p>
+                
+                <!-- 
+                    FORMSPREE CONFIGURED ✅
+                    Endpoint: https://formspree.io/f/xyzbjqak
+                    Form submissions sent to: contact@engcoresolutions.com.au
+                    Redirects to thanks.html after successful submission
+                -->
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/xyzbjqak" method="POST">
+                    
+                    <!-- Hidden fields for Formspree -->
+                    <input type="hidden" name="_subject" value="New inquiry from EngCore Solutions website">
+                    <input type="hidden" name="_cc" id="emailCc">
+                    
+                    <!-- Honeypot field for spam prevention -->
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                    
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interest">Area of Interest *</label>
+                        <select id="interest" name="interest" required>
+                            <option value="">Select a service</option>
+                            <option value="executive">Executive Consulting</option>
+                            <option value="capital">Capital Investment Analysis</option>
+                            <option value="asset">Asset Management</option>
+                            <option value="project">Project Management</option>
+                            <option value="multiple">Multiple Services</option>
+                            <option value="other">General Inquiry</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Tell us about your project *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Inquiry</button>
+                </form>
+                
+                <div class="contact-info">
+                    <p><strong>Direct Contact</strong></p>
+                    <p>📧 contact@engcoresolutions.com.au</p>
+                    <p>📍 Brisbane, Queensland, Australia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 EngCore Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Auto-populate CC field with user's email so they receive a copy
+        const emailInput = document.getElementById('email');
+        const emailCc = document.getElementById('emailCc');
+
+        emailInput.addEventListener('input', function() {
+            emailCc.value = this.value;
+        });
+
+        // Ensure CC is set before form submission
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', function() {
+            emailCc.value = emailInput.value;
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
