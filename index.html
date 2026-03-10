@@ -354,31 +354,22 @@
             display: none;
             background: #28a745;
             color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
             text-align: center;
-            font-weight: 500;
-            line-height: 1.8;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
-        }
-        
-        .success-message strong {
-            font-size: 1.2rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
         
         .success-message.show {
             display: block;
-            animation: slideDown 0.4s ease-out;
+            animation: slideDown 0.3s ease-out;
         }
         
         @keyframes slideDown {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
@@ -555,9 +546,8 @@
                     FORMSPREE CONFIGURED ✅
                     Endpoint: https://formspree.io/f/xyzbjqak
                     Form submissions will be sent to: contact@engcoresolutions.com.au
-                    Uses AJAX to stay on page and provide better UX
                 -->
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/xyzbjqak" method="POST">
                     
                     <!-- Honeypot field - catches bots (invisible to humans) -->
                     <div style="position: absolute; left: -5000px;" aria-hidden="true">
@@ -566,9 +556,6 @@
                     
                     <!-- Timestamp field for rate limiting -->
                     <input type="hidden" name="_timestamp" id="timestamp">
-                    
-                    <!-- Custom subject line -->
-                    <input type="hidden" name="_subject" value="New inquiry from EngCore Solutions website">
                     
                     <div class="form-group">
                         <label for="name">Name *</label>
@@ -611,17 +598,11 @@
                     <button type="submit" class="submit-btn" id="submitBtn">Submit Inquiry</button>
                     
                     <div class="success-message" id="successMessage">
-                        <strong>✓ Thank You!</strong><br>
-                        Your inquiry has been successfully submitted.<br><br>
-                        We've received your message and will respond within 24 hours during business hours (Monday-Friday, 9am-5pm AEST).<br><br>
-                        If your inquiry is urgent, please email us directly at:<br>
-                        <strong>contact@engcoresolutions.com.au</strong>
+                        Thank you! We'll be in touch within 24 hours.
                     </div>
                     
                     <div class="success-message" id="errorMessage" style="background: #dc3545;">
-                        <strong>⚠ Oops!</strong><br>
-                        Something went wrong. Please try again or email us directly at:<br>
-                        <strong>contact@engcoresolutions.com.au</strong>
+                        Oops! Something went wrong. Please try again or email us directly.
                     </div>
                 </form>
                 
@@ -720,9 +701,6 @@
         // FORM SUBMISSION WITH SECURITY
         // ============================================
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            // CRITICAL: Prevent default form submission (page refresh)
-            e.preventDefault();
-            
             const form = this;
             const submitBtn = document.getElementById('submitBtn');
             const successMsg = document.getElementById('successMessage');
@@ -784,79 +762,17 @@
             // Add timestamp for server-side tracking
             document.getElementById('timestamp').value = new Date().toISOString();
             
-            // Formspree endpoint
-            const formspreeEndpoint = 'https://formspree.io/f/xyzbjqak';
-            
+            // Formspree is configured - form will submit
             // Disable submit button to prevent double-submission
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
             
-            // Prepare form data for Formspree
-            const formData = new FormData(form);
+            // Update rate limiting
+            lastSubmissionTime = Date.now();
+            submissionCount++;
             
-            // Submit to Formspree via AJAX
-            fetch(formspreeEndpoint, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Success! Update rate limiting
-                    lastSubmissionTime = Date.now();
-                    submissionCount++;
-                    
-                    // Show success message
-                    successMsg.classList.add('show');
-                    
-                    // Reset form
-                    form.reset();
-                    
-                    // Re-enable button
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Submit Inquiry';
-                    
-                    // Hide success message after 8 seconds
-                    setTimeout(() => {
-                        successMsg.classList.remove('show');
-                    }, 8000);
-                    
-                    console.log('✅ Form submitted successfully to Formspree');
-                } else {
-                    // Error from Formspree
-                    response.json().then(data => {
-                        console.error('Formspree error:', data);
-                        errorMsg.textContent = 'Oops! There was a problem. Please try again or email us directly.';
-                        errorMsg.classList.add('show');
-                        
-                        // Re-enable button
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Submit Inquiry';
-                        
-                        // Hide error after 8 seconds
-                        setTimeout(() => {
-                            errorMsg.classList.remove('show');
-                        }, 8000);
-                    });
-                }
-            })
-            .catch(error => {
-                // Network error or other issue
-                console.error('Submission error:', error);
-                errorMsg.textContent = 'Network error. Please check your connection and try again.';
-                errorMsg.classList.add('show');
-                
-                // Re-enable button
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Inquiry';
-                
-                // Hide error after 8 seconds
-                setTimeout(() => {
-                    errorMsg.classList.remove('show');
-                }, 8000);
-            });
+            // Let the form submit to Formspree naturally
+            // Formspree will handle the email delivery and show confirmation
         });
         
         // ============================================
@@ -879,10 +795,9 @@
         console.log('✅ Input sanitization (XSS prevention)');
         console.log('✅ Email validation');
         console.log('✅ Session submission limit (5 max)');
-        console.log('✅ Formspree configured and ready (AJAX mode)');
+        console.log('✅ Formspree configured and ready');
         console.log('\n📧 Form submissions will be sent to: contact@engcoresolutions.com.au');
         console.log('🚀 Your contact form is LIVE and secure!');
-        console.log('💡 Form stays on page - no redirect to Formspree');
     </script>
 </body>
 </html>
