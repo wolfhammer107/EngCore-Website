@@ -1,68 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-AU">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>EngCore Solutions | Engineering Consultancy Brisbane | Capital Investment & Asset Management</title>
-    <meta name="title" content="EngCore Solutions | Engineering Consultancy Brisbane | Capital Investment & Asset Management">
-    <meta name="description" content="Expert engineering consultancy in Brisbane, Queensland. 20+ years experience in capital investment analysis, asset management, and project management for manufacturing, mining, and infrastructure. CPEng & RPEQ certified.">
-    <meta name="keywords" content="engineering consultancy Brisbane, capital investment analysis, asset management Queensland, CPEng consultant, RPEQ engineer, mechanical engineering consultant, project management Brisbane, CapEx evaluation, engineering services Australia">
-    <meta name="author" content="EngCore Solutions">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="geo.region" content="AU-QLD">
-    <meta name="geo.placename" content="Brisbane">
-    <link rel="canonical" href="https://engcoresolutions.com.au/">
-    
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="dziUZTB4HJzcW8Cqaigv0o0Pvpu30c-_1UBgoBGTOZo" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://engcoresolutions.com.au/">
-    <meta property="og:title" content="EngCore Solutions | Engineering Consultancy Brisbane">
-    <meta property="og:description" content="Expert engineering consultancy for capital investment, asset management, and project management. 20+ years experience. CPEng & RPEQ certified.">
-    <meta property="og:site_name" content="EngCore Solutions">
-    <meta property="og:locale" content="en_AU">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://engcoresolutions.com.au/">
-    <meta property="twitter:title" content="EngCore Solutions | Engineering Consultancy Brisbane">
-    <meta property="twitter:description" content="Expert engineering consultancy for capital investment, asset management, and project management. 20+ years experience. CPEng & RPEQ certified.">
-    
-    <!-- Structured Data / Schema.org for Google -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "EngCore Solutions",
-      "description": "Professional engineering consultancy specializing in capital investment analysis, asset management, and project management",
-      "url": "https://engcoresolutions.com.au",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Brisbane",
-        "addressRegion": "QLD",
-        "addressCountry": "AU"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "-27.4705",
-        "longitude": "153.0260"
-      },
-      "email": "contact@engcoresolutions.com.au",
-      "areaServed": {
-        "@type": "Country",
-        "name": "Australia"
-      },
-      "serviceType": ["Engineering Consultancy", "Capital Investment Analysis", "Asset Management", "Project Management"],
-      "priceRange": "$$$$",
-      "knowsAbout": ["Mechanical Engineering", "Capital Expenditure", "Asset Management", "Project Management", "Risk Assessment"],
-      "slogan": "Engineering excellence meets digital innovation"
-    }
-    </script>
+    <title>EngCore Solutions | Engineering Consultancy Services</title>
+    <meta name="description" content="Expert engineering consultancy for capital investment, asset management, and project management. 20+ years experience serving manufacturing, mining, and infrastructure.">
     
     <style>
         * {
@@ -354,31 +296,22 @@
             display: none;
             background: #28a745;
             color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
             text-align: center;
-            font-weight: 500;
-            line-height: 1.8;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
-        }
-        
-        .success-message strong {
-            font-size: 1.2rem;
-            font-weight: 700;
-            display: block;
-            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
         
         .success-message.show {
             display: block;
-            animation: slideDown 0.4s ease-out;
+            animation: slideDown 0.3s ease-out;
         }
         
         @keyframes slideDown {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
@@ -555,9 +488,8 @@
                     FORMSPREE CONFIGURED ✅
                     Endpoint: https://formspree.io/f/xyzbjqak
                     Form submissions will be sent to: contact@engcoresolutions.com.au
-                    Uses AJAX to stay on page and provide better UX
                 -->
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/xyzbjqak" method="POST">
                     
                     <!-- Honeypot field - catches bots (invisible to humans) -->
                     <div style="position: absolute; left: -5000px;" aria-hidden="true">
@@ -566,9 +498,6 @@
                     
                     <!-- Timestamp field for rate limiting -->
                     <input type="hidden" name="_timestamp" id="timestamp">
-                    
-                    <!-- Custom subject line -->
-                    <input type="hidden" name="_subject" value="New inquiry from EngCore Solutions website">
                     
                     <div class="form-group">
                         <label for="name">Name *</label>
@@ -611,17 +540,11 @@
                     <button type="submit" class="submit-btn" id="submitBtn">Submit Inquiry</button>
                     
                     <div class="success-message" id="successMessage">
-                        <strong>✓ Thank You!</strong><br>
-                        Your inquiry has been successfully submitted.<br><br>
-                        We've received your message and will respond within 24 hours during business hours (Monday-Friday, 9am-5pm AEST).<br><br>
-                        If your inquiry is urgent, please email us directly at:<br>
-                        <strong>contact@engcoresolutions.com.au</strong>
+                        Thank you! We'll be in touch within 24 hours.
                     </div>
                     
                     <div class="success-message" id="errorMessage" style="background: #dc3545;">
-                        <strong>⚠ Oops!</strong><br>
-                        Something went wrong. Please try again or email us directly at:<br>
-                        <strong>contact@engcoresolutions.com.au</strong>
+                        Oops! Something went wrong. Please try again or email us directly.
                     </div>
                 </form>
                 
@@ -720,9 +643,6 @@
         // FORM SUBMISSION WITH SECURITY
         // ============================================
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            // CRITICAL: Prevent default form submission (page refresh)
-            e.preventDefault();
-            
             const form = this;
             const submitBtn = document.getElementById('submitBtn');
             const successMsg = document.getElementById('successMessage');
@@ -784,79 +704,17 @@
             // Add timestamp for server-side tracking
             document.getElementById('timestamp').value = new Date().toISOString();
             
-            // Formspree endpoint
-            const formspreeEndpoint = 'https://formspree.io/f/xyzbjqak';
-            
+            // Formspree is configured - form will submit
             // Disable submit button to prevent double-submission
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
             
-            // Prepare form data for Formspree
-            const formData = new FormData(form);
+            // Update rate limiting
+            lastSubmissionTime = Date.now();
+            submissionCount++;
             
-            // Submit to Formspree via AJAX
-            fetch(formspreeEndpoint, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Success! Update rate limiting
-                    lastSubmissionTime = Date.now();
-                    submissionCount++;
-                    
-                    // Show success message
-                    successMsg.classList.add('show');
-                    
-                    // Reset form
-                    form.reset();
-                    
-                    // Re-enable button
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Submit Inquiry';
-                    
-                    // Hide success message after 8 seconds
-                    setTimeout(() => {
-                        successMsg.classList.remove('show');
-                    }, 8000);
-                    
-                    console.log('✅ Form submitted successfully to Formspree');
-                } else {
-                    // Error from Formspree
-                    response.json().then(data => {
-                        console.error('Formspree error:', data);
-                        errorMsg.textContent = 'Oops! There was a problem. Please try again or email us directly.';
-                        errorMsg.classList.add('show');
-                        
-                        // Re-enable button
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Submit Inquiry';
-                        
-                        // Hide error after 8 seconds
-                        setTimeout(() => {
-                            errorMsg.classList.remove('show');
-                        }, 8000);
-                    });
-                }
-            })
-            .catch(error => {
-                // Network error or other issue
-                console.error('Submission error:', error);
-                errorMsg.textContent = 'Network error. Please check your connection and try again.';
-                errorMsg.classList.add('show');
-                
-                // Re-enable button
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Inquiry';
-                
-                // Hide error after 8 seconds
-                setTimeout(() => {
-                    errorMsg.classList.remove('show');
-                }, 8000);
-            });
+            // Let the form submit to Formspree naturally
+            // Formspree will handle the email delivery and show confirmation
         });
         
         // ============================================
@@ -879,10 +737,9 @@
         console.log('✅ Input sanitization (XSS prevention)');
         console.log('✅ Email validation');
         console.log('✅ Session submission limit (5 max)');
-        console.log('✅ Formspree configured and ready (AJAX mode)');
+        console.log('✅ Formspree configured and ready');
         console.log('\n📧 Form submissions will be sent to: contact@engcoresolutions.com.au');
         console.log('🚀 Your contact form is LIVE and secure!');
-        console.log('💡 Form stays on page - no redirect to Formspree');
     </script>
 </body>
 </html>
